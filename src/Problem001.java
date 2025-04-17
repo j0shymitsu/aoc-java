@@ -23,41 +23,61 @@ Your actual left and right lists contain many location IDs. What is the total di
 */
 
 import java.io.File;
-import java.util.Arrays;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Problem001
 {
     public static void main(String[] args)
     {
-          /* EXAMPLE */
-        int[] listOne = new int[]{};
-        int[] listTwo = new int[]{};
-//
-//        Arrays.sort(listOne);
-//        Arrays.sort(listTwo);
-//
-//        int distance = 0;
-//
-//        for (int i = 0; i < listOne.length; i++)
-//        {
-//            distance += (listTwo[i] - listOne[i]);
-//        }
-//
-//        System.out.println(distance);
-    }
+        ArrayList<Integer> nums = new ArrayList<>();
+        ArrayList<Integer> numsTwo = new ArrayList<>();
+        File numbersFile = new File("data/problem001.dat");
+        int distance = 0;    // final answer
 
-    public static void()
-    {
-        // while not end of file
-        // delimiter = " "
-        // counter = 0
+        try
+        {
+            Scanner numberScanner = new Scanner(numbersFile);
 
-        // if counter = 0
-            //  add current number to array1
-            // if delimiter, counter + 1
 
-        // add current number to array2
-        // counter -1
+            while (numberScanner.hasNext())
+            {
+                int count = 0;
+
+                if (count == 0)
+                {
+                    Integer number = numberScanner.nextInt();
+                    nums.add(number);
+                    count += 1;
+                }
+
+                if (count == 1)
+                {
+                    Integer number = numberScanner.nextInt();
+                    numsTwo.add(number);
+                    count -= 1;
+                }
+
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("Can't read file");
+            System.out.println(e.getMessage());
+        }
+
+        Collections.sort(nums);
+        Collections.sort(numsTwo);
+
+        for (int i = 0; i < numsTwo.toArray().length; i++)
+        {
+            distance += Math.abs(nums.get(i) - numsTwo.get(i));    // difference regardless of what side
+//                    (nums.get(i) - numsTwo.get(i));
+        }
+
+        System.out.println(distance);
+
     }
 }
