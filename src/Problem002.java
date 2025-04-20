@@ -22,22 +22,27 @@ public class Problem002
         try
         {
             Scanner reportScanner = new Scanner(dataFile);
-            String currentReportString = "";
 
             while (reportScanner.hasNext())
             {
                 String numberString = reportScanner.nextLine();
-                currentReportString += numberString;
                 String regex = " ";
-                String[] currentReportStringArray = currentReportString.split(regex);
+                String[] currentReportStringArray = numberString.split(regex);
 
                 for (String s : currentReportStringArray)
                 {
                     int stringAsNumber = Integer.parseInt(s);
-                    currentReport.add(stringAsNumber);
+                    currentReport.add(stringAsNumber);    // step thru and reset working
+                }
+                /* safe report check logic here*/
+
+                if ((allNumbersIncreasing(currentReport) ||
+                    allNumbersDecreasing(currentReport)) &&
+                    (notGreaterThanTwo(currentReport)))
+                {
+                    safeReports++;
                 }
 
-                System.out.println(currentReport);
                 currentReport = new ArrayList<>();
             }
 
@@ -46,6 +51,8 @@ public class Problem002
             System.out.println("can't read file");
             System.out.println(e.getMessage());
         }
+
+        System.out.println("There are " + safeReports + " SAFE reports in the data.");
 
     }
 
