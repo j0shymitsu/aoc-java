@@ -38,7 +38,7 @@ public class Problem002
 
                 if ((allNumbersIncreasing(currentReport) ||
                     allNumbersDecreasing(currentReport)) &&
-                    (notGreaterThanTwo(currentReport)))
+                    (notGreaterThanThree(currentReport)))
                 {
                     safeReports++;
                 }
@@ -85,13 +85,13 @@ public class Problem002
     }
 
     // method to check if all numbers are less than 3 in difference and return true
-    public static boolean notGreaterThanTwo(ArrayList<Integer> numbers)
+    public static boolean notGreaterThanThree(ArrayList<Integer> numbers)
     {
         for (int i = 0; i < numbers.size() - 1; i++)
         {
             int difference = Math.abs(numbers.get(i) - numbers.get(i + 1));
 
-            if (difference > 2)
+            if (difference > 3)
             {
                 return false;
             }
