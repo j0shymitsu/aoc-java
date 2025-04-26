@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Problem003
 {
@@ -6,31 +9,25 @@ public class Problem003
         return x * y;
     }
 
-    static ArrayList<Character> stringToArray(String str) {
-        ArrayList<Character> characterList = new ArrayList<>();
+    // method to extract the multiplier pattern from string of text
+    static ArrayList<String> multipliersInString(String str) {
+        ArrayList<String> multiplierList = new ArrayList<>();
+        Matcher matcher = Pattern.compile("mul").matcher(str);
 
-        for (int i = 0; i < str.length(); i++) {
-            characterList.add(str.charAt(i));
+        while (matcher.find()) {
+            System.out.println(matcher.group(1));
         }
-
-        return characterList;
     }
 
-    // unfinished (testing) -  remove valueOf only removes first instance
-    static ArrayList<Character> cleanInput(ArrayList<Character> charList) {
-        charList.remove(Character.valueOf('m'));
-        return charList;
-    }
+    // convert extracted multipliers into array of multipliers
+
 
     public static void main(String[] args)
     {
         String testString = "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))";
-        ArrayList<Character> stringAsList = stringToArray(testString);
-        cleanInput(stringAsList);
 
-        for (Character c : stringAsList) {
-            System.out.print(c);
-        }
+        String[] multipliers = multipliersInString(testString);
+        System.out.println(Arrays.toString(multipliers));
 
     }
 }
